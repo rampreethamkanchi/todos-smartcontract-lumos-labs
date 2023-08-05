@@ -1,16 +1,47 @@
 .App {
-  text-align: center;
+    text-align: center;
 }
-.info{
-  font-size: 1.5rem;
-  margin: 2rem;
-  padding: 0.5rem 1rem;
+.info {
+    font-size: 1.4rem;
+    margin: 1rem;
+    padding: 0.5rem 1rem;
 }
-#submitValue{
-  background-color: blue;
-  border-radius: 0.6rem;
-  color: white;
+#submitValue {
+    background-color: blue;
+    border-radius: 0.6rem;
+    color: white;
+    cursor: pointer;
 }
-#update{
-  font-size: 1.5rem;
+#update {
+    font-size: 1.5rem;
+}
+.infos{
+    margin: 0.5rem;
+    font-weight: bold;
+    font-size: 1.3rem;
+    background-color: wheat;
+    border-radius: 0.5rem;
+    padding: 1rem;
+}
+#info1{
+    background-color: darkblue;
+    color: white;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 1.5rem;
+}
+#refresh{
+    background-color: blue;
+    border-radius: 0.6rem;
+    color: white;
+    cursor: pointer;
+}
+#image {
+    /* background-repeat: repeat-y; */
+    width: 400px;
+}
+@media (max-width: 700px) {
+    #image {
+        /* background-repeat: repeat-y; */
+        display: none;
+    }
 }
