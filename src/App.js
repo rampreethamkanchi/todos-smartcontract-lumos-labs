@@ -1,7 +1,9 @@
 import "./App.css";
 import React from "react";
+const abi = require('../contract-abi.json');
 const { ethers } = require("ethers");
 function App() {
+    const address = '0xc29fbc55aa098022df3de90a77ebcd5544f37382';
     const [hash, setHash] = React.useState('none');
     const [status, setStatus] = React.useState('none');
     const [gasFee, setGasFee] = React.useState('none');
@@ -10,141 +12,21 @@ function App() {
     const [to, setTo] = React.useState('none');
     const [block, setBlock] = React.useState('none');
     const [currentValue, setCurrentValue] = React.useState(0);
-    React.useEffect(() => {
-        const abi = [
-            {
-                inputs: [
-                    {
-                        internalType: "uint16",
-                        name: "_value",
-                        type: "uint16",
-                    },
-                ],
-                name: "store",
-                outputs: [],
-                stateMutability: "nonpayable",
-                type: "function",
-            },
-            {
-                inputs: [],
-                name: "value",
-                outputs: [
-                    {
-                        internalType: "uint16",
-                        name: "",
-                        type: "uint16",
-                    },
-                ],
-                stateMutability: "view",
-                type: "function",
-            },
-        ];
-        async function a() {
-            const provider = new ethers.providers.Web3Provider(window.ethereum);
-            const contract = new ethers.Contract(
-                "0x3468ce335938c2e4747e5b6c9a87b94169be17e0",
-                abi,
-                provider
-            );
-            const initialValue = await contract.value();
-            setCurrentValue(String(initialValue));
-        }
-        a();
-    }, [currentValue]);
-    async function handleRefresh(){
-        try{
-            setCurrentValue('fetching...');
-        }
-        catch(e){
-            console.log('some error occured while retrieving the value on blockchain');
-            console.log('error message',e);
-        }
+    // contract address - 0xc29fbc55aa098022df3de90a77ebcd5544f37382
+    async function handleCreate(){
+        const input = document.getElementById('input');
+        const value = input.value;
+        const accounts= await window.ethereum.request({
+            method : 'eth_requestAccounts'
+        })
+        alert(`Connected to ${accounts[0]}`);
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+        const contract = new ethers.Contract(address,abi,signer);
+        const transactionResponce = await contract.createTodo(value);
+        const transactonReciept = await transactionResponce.wait(1);
     }
-    async function handleSubmit() {
-        try {
-            // contract address - 0x3468ce335938c2e4747e5b6c9a87b94169be17e0
-            // const provider = new ethers.BrowserProvider(window.ethereum);
-            // my address - 0x7C6c885Df55e42E0aFccfbE42F9bf6D906F7C827;
-            // private key -  035f80f66bf2c6e1a5c61886302d88a41c0244e1e23fb6f967898412e636479c
-            // my rpc url - https://eth-sepolia.g.alchemy.com/v2/jagNpWxwdx3cUV04kxR2LgbXaffhOuvr
-            const abi = [
-                {
-                    inputs: [
-                        {
-                            internalType: "uint16",
-                            name: "_value",
-                            type: "uint16",
-                        },
-                    ],
-                    name: "store",
-                    outputs: [],
-                    stateMutability: "nonpayable",
-                    type: "function",
-                },
-                {
-                    inputs: [],
-                    name: "value",
-                    outputs: [
-                        {
-                            internalType: "uint16",
-                            name: "",
-                            type: "uint16",
-                        },
-                    ],
-                    stateMutability: "view",
-                    type: "function",
-                },
-            ];
-            //wallet,rpc provider,contract info
-            if (window.ethereum) {
-                async function a() {
-                    await window.ethereum.request({
-                        method: "eth_requestAccounts",
-                    });
-                    const provider = new ethers.providers.Web3Provider(
-                        window.ethereum
-                    );
-                    // const wallet = new ethers.Wallet()
-                    // const wallet =  new ethers.Wallet(,provider)
-                    const signer = provider.getSigner();
-                    const contract = new ethers.Contract(
-                        "0x3468ce335938c2e4747e5b6c9a87b94169be17e0",
-                        abi,
-                        signer
-                    );
-                    const q = document.getElementById("update");
-
-                    const transactionResponce = await contract.store(q.value);
-                    const transactionReciept = await transactionResponce.wait(
-                        1
-                    );
-                    console.log("transactionReciept:", transactionReciept);
-                    if(transactionReciept.status==1){
-                        setStatus('success');
-                    }
-                    else{
-                        setStatus('failed');
-                    }
-                    setHash(transactionReciept.transactionHash);
-                    setFrom(transactionReciept.from);
-                    setTo(transactionReciept.to);
-                    setBlock(transactionReciept.blockNumber);
-                    // const gasPrice = ethers.utils.parseUnits((transactionReciept.effectiveGasPrice).toString());
-                    // setGasFee(gasPrice);
-                    // const totalFee = Number(ethers.utils.parseUnits(String(transactionReciept.effectiveGasPrice)))*Number(ethers.utils.parseUnits((transactionReciept.cumulativeGasUsed).tostring()));
-                    // setTransactionFee(totalFee);
-                }
-                a();
-            } else {
-                console.log("please connect to metamask or other wallets");
-            }
-        } catch (e) {
-            console.log("error uccured ramu!", e);
-            // return (
-            //   <h1 className='App'>error uccured ramu!</h1>
-            // );
-        }
-    }
+    
     return (
         <div className="App">
             <img
@@ -153,30 +35,14 @@ function App() {
                 id="image"
             />
             <h1 id="heading">
-                This website can be used to store a value in Sepolia blockchain
+                This website can be used to store your Todo lists in <b>Sepolia blockchain</b>
             </h1>
-            <h3 id="subHeading">and also different functionalities</h3>
-            <div id="currentValue" className="info">
-                <span> The present value in the blockchain is: </span>
-                <span>{currentValue}</span><button id='refresh' className="info" onClick={handleRefresh}>Refresh the value</button>
-                <div id="inputValue" className="info">
-                    <label htmlFor="update">
-                        Enter the value you would love to store:
-                    </label>
-                    <input
-                        type="text"
-                        id="update"
-                        placeholder="from 0 to 65535"
-                    />
-                </div>
-                <button
-                    id="submitValue"
-                    onClick={handleSubmit}
-                    className="info"
-                >
-                    submit
-                </button>
-            </div>
+            <h3 id="subHeading">and also gives you different functionalities</h3>
+            <input type="text" placeholder="Enter a name to your Todo" id="input" />
+            <button id="create" className="btn" onClick={handleCreate}>Create a Todo</button>
+            <button id="disable" className="btn" onClick={handleDisable}>Delete</button>
+            <button id="edit" className="btn" onClick={handleEdit}>Edit</button>
+            
             <div className="infos" id="info1">Information regarding your recent transaction with the blockchain</div>
             <div className="infos" id="info2">Transaction Hash : {hash}</div>
             <div className="infos" id="info3">Transaction Status : {status}</div>
