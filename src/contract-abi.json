@@ -1,5 +1,18 @@
 [
 	{
+		"inputs": [],
+		"name": "countOfTodos",
+		"outputs": [
+			{
+				"internalType": "uint8",
+				"name": "",
+				"type": "uint8"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "string",
@@ -29,28 +42,16 @@
 		"inputs": [
 			{
 				"internalType": "uint8",
-				"name": "_id",
-				"type": "uint8"
-			},
-			{
-				"internalType": "string",
-				"name": "_updateTitle",
-				"type": "string"
-			}
-		],
-		"name": "editTodo",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "countOfTodos",
-		"outputs": [
-			{
-				"internalType": "uint8",
 				"name": "",
 				"type": "uint8"
+			}
+		],
+		"name": "map",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
 			}
 		],
 		"stateMutability": "view",
