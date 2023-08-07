@@ -1,16 +1,82 @@
 .App {
-  text-align: center;
+    text-align: center;
 }
-.info{
-  font-size: 1.5rem;
-  margin: 2rem;
-  padding: 0.5rem 1rem;
+.info {
+    font-size: 1.4rem;
+    margin: 1rem;
+    padding: 0.5rem 1rem;
 }
-#submitValue{
-  background-color: blue;
-  border-radius: 0.6rem;
-  color: white;
+#submitValue {
+    background-color: blue;
+    border-radius: 0.6rem;
+    color: white;
+    cursor: pointer;
 }
-#update{
-  font-size: 1.5rem;
+#update {
+    font-size: 1.5rem;
+}
+.infos{
+    margin: 0.5rem;
+    font-weight: bold;
+    font-size: 1.3rem;
+    background-color: wheat;
+    border-radius: 0.5rem;
+    padding: 1rem;
+}
+#info1{
+    background-color: darkblue;
+    color: white;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 1.5rem;
+}
+#refresh{
+    background-color: blue;
+    border-radius: 0.6rem;
+    color: white;
+    cursor: pointer;
+}
+#image {
+    /* background-repeat: repeat-y; */
+    width: 400px;
+}
+.btn{
+    font-size: 1.2rem;
+    background-color: blue;
+    border-radius: 0.6rem;
+    color: white;
+    cursor: pointer;
+    padding: 0.4rem 1rem; 
+     margin: 0.4rem 1rem; 
+    /* width: 10%; */
+}
+#input{
+    font-size: 1.5rem;
+}
+.yourTodo{
+    background-color: rgb(58, 247, 247);
+    border: 1.5px solid black;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin:  0.25rem auto;
+    padding: 0.1rem;
+}
+.left{
+    width: 70%;
+    text-align: left;
+    padding: 0.4rem 0.1rem 0.4rem 2rem;
+}
+#connecting{
+    font-size: 1.8rem;
+    padding: 0.5rem 1rem;
+    margin: 1rem 0rem;
+    background-color: red;
+    border: 3px solid black;
+}
+@media (max-width: 700px) {
+    #image {
+        /* background-repeat: repeat-y; */
+        display: none;
+    }
 }
