@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/todos-smartcontract-lumos-labs/static/css/main.fca54dde.css",
+    "main.js": "/todos-smartcontract-lumos-labs/static/js/main.2967fce7.js",
+    "static/js/787.64617b1c.chunk.js": "/todos-smartcontract-lumos-labs/static/js/787.64617b1c.chunk.js",
+    "index.html": "/todos-smartcontract-lumos-labs/index.html",
+    "main.fca54dde.css.map": "/todos-smartcontract-lumos-labs/static/css/main.fca54dde.css.map",
+    "main.2967fce7.js.map": "/todos-smartcontract-lumos-labs/static/js/main.2967fce7.js.map",
+    "787.64617b1c.chunk.js.map": "/todos-smartcontract-lumos-labs/static/js/787.64617b1c.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.fca54dde.css",
+    "static/js/main.2967fce7.js"
+  ]
+}
