@@ -20,7 +20,6 @@ Experience the Todo Dapp live at [https://rampreethamkanchi.github.io/todos-smar
 3. Create new todos, delete completed tasks, and explore the transaction history.
 
 ## Smart Contract
-The smart contract (`Contract.sol`) responsible for managing todos is available in the [Contract folder](./Contract).
 
 **Contract.sol**
 ```solidity
