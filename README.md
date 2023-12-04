@@ -1,70 +1,82 @@
-# Getting Started with Create React App
+# Todo Dapp
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Blockchain Explorer](https://media.istockphoto.com/id/1344021555/photo/blocks-with-locks-on-dark-blue-background-future-innovation-blockchain-technology-token-money.webp?b=1&s=170667a&w=0&k=20&c=CgTveKWIUY7mVdbvRqdpx93afQ35MuLn5MGZIVEOYAU=)
 
-## Available Scripts
+## Overview
+Welcome to the Todo Dapp, a decentralized application (Dapp) developed using blockchain technology. This application utilizes a blockchain-based smart contract as the backend infrastructure and is built with React for the frontend. The Dapp allows users to manage their todo lists securely on the Sepolia blockchain.
 
-In the project directory, you can run:
+## Features
+- **Wallet Connection**: Connect your wallet, such as MetaMask, to interact with the smart contract on the blockchain.
+- **Task Creation**: Create and store your todos securely on the blockchain.
+- **Transaction History**: Retrieve and view details of previous transactions, including transaction hash, status, block number, sender, and recipient.
+- **Delete Tasks**: Remove completed tasks within the application.
 
-### `npm start`
+## Live Demo
+Experience the Todo Dapp live at [https://rampreethamkanchi.github.io/todos-smartcontract-lumos-labs/](https://rampreethamkanchi.github.io/todos-smartcontract-lumos-labs/)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Getting Started
+1. Install a compatible wallet extension (e.g., MetaMask) in your browser.
+2. Connect your wallet to the Dapp by clicking on "Click here to connect To MetaMask To see your Todo List."
+3. Create new todos, delete completed tasks, and explore the transaction history.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Smart Contract
+The smart contract (`Contract.sol`) responsible for managing todos is available in the [Contract folder](./Contract).
 
-### `npm test`
+**Contract.sol**
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.7;
+contract TodoApp{
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+    uint8 public countOfTodos=0;
 
-### `npm run build`
+// Structure to store title, id and status of the todo.
+    struct todo{
+        uint8 id;
+        string title;
+        bool status;
+    }
+// Array of todos.
+    todo[] public todoList;
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+// Mapping to map id to address of creater of todo.
+    mapping (uint8 => address) public map ;
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+// fuction to create a new todo and add it to array and mapping.
+    function createTodo(string memory _title) public {
+        countOfTodos++;
+        todo memory userTodo;
+        userTodo.title=_title;
+        userTodo.status=true;
+        userTodo.id=countOfTodos;
+        todoList.push(userTodo);
+        map[countOfTodos]=msg.sender;
+    }
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+// function to disable (delete) a todo by setting status to false.
+    function disableTodo(uint8 _id) public {
+        todoList[(_id)-1].status=false;
+    }
 
-### `npm run eject`
+}
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+**Note:** To run the project, you will need some Sepolia test Ether, as the contract is deployed on the Sepolia testnet.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Recent Transactions
+Check the information regarding your recent transactions with the smart contract in the application.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- **Transaction Hash**: {hash}
+- **Transaction Status**: {status}
+- **Block Number**: {block}
+- **From**: {from}
+- **To**: {to}
+- **Transaction Fee**: {transactionFee}
+- **Gas Price**: {gasFee}
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Future Plans
+The Todo Dapp is an ongoing project, and future updates may include additional features and improvements to enhance the user experience.
 
-## Learn More
+Feel free to explore, contribute, or provide feedback!
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+*Note: Ensure that you have a compatible wallet extension (e.g., MetaMask) installed to interact with the blockchain.*
